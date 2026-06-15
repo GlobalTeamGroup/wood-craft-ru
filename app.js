@@ -1,23 +1,23 @@
-﻿// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
-//  WOOD & CRAFT â€” app.js
+﻿// ════════════════════════════════════════════════════════
+//  WOOD & CRAFT — app.js
 //  Cinematic Scroll Engine v2
-// â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•
+// ════════════════════════════════════════════════════════
 
-// â”€â”€ CONSTANTS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── CONSTANTS ──────────────────────────────────────────
 const TOTAL_FRAMES = 430;     // wood-craft-ru frames
 const PAGE_COUNT   = 6;
 const LERP         = 0.02;  // cinematic smoothness
 const CONCURRENCY  = 48;    // parallel frame loading
 
-// â”€â”€ DEVICE DETECTION â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── DEVICE DETECTION ───────────────────────────────────
 const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent) || innerWidth < 768;
 const FRAME_DIR = isMobile ? 'frames-mobile' : 'frames-webp';
 
-// â”€â”€ CANVAS SETUP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── CANVAS SETUP ───────────────────────────────────────
 const canvas = document.getElementById('gl-canvas');
 const ctx    = canvas.getContext('2d');
 
-// âš ï¸ IMPORTANT: module-level â€” must match resize() and drawFrame()
+// ⚠️ IMPORTANT: module-level — must match resize() and drawFrame()
 let canvasDpr = 1;
 
 function resize() {
@@ -31,7 +31,7 @@ function resize() {
 window.addEventListener('resize', resize);
 resize();
 
-// â”€â”€ PARTICLE CANVAS â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── PARTICLE CANVAS ────────────────────────────────────
 const pCanvas = document.getElementById('particle-canvas');
 const pCtx    = pCanvas.getContext('2d');
 
@@ -74,7 +74,7 @@ function drawParticles() {
   });
 }
 
-// â”€â”€ FRAME LOADING â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── FRAME LOADING ──────────────────────────────────────
 const frames = new Array(TOTAL_FRAMES);
 let loadedCount = 0;
 let isReady     = false;
@@ -122,7 +122,7 @@ async function loadAll() {
   await Promise.all(Array.from({ length: CONCURRENCY }, worker));
 }
 
-// â”€â”€ SCROLL â†’ FRAME â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── SCROLL → FRAME ─────────────────────────────────────
 let currentFrame = 0;
 let targetFrame  = 0;
 
@@ -133,13 +133,13 @@ window.addEventListener('scroll', () => {
   targetFrame = progress * (TOTAL_FRAMES - 1);
 }, { passive: true });
 
-// â”€â”€ DRAW FRAME â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── DRAW FRAME ─────────────────────────────────────────
 function drawFrame(idx) {
   const img = frames[Math.max(0, Math.min(Math.round(idx), TOTAL_FRAMES - 1))];
   if (!img || !img.complete) return;
 
-  // âš ï¸ Use innerWidth/innerHeight â€” ctx.setTransform already scales for dpr
-  // DO NOT use canvas.width / devicePixelRatio â€” mobile dpr mismatch!
+  // ⚠️ Use innerWidth/innerHeight — ctx.setTransform already scales for dpr
+  // DO NOT use canvas.width / devicePixelRatio — mobile dpr mismatch!
   const W = innerWidth;
   const H = innerHeight;
 
@@ -153,7 +153,7 @@ function drawFrame(idx) {
   ctx.clearRect(0, 0, W, H);
   ctx.drawImage(img, x, y, iw, ih);
 
-  // Radial vignette â€” warm dark BG colour (#0A0705)
+  // Radial vignette — warm dark BG colour (#0A0705)
   const vig = ctx.createRadialGradient(W / 2, H / 2, H * 0.18, W / 2, H / 2, H * 0.88);
   vig.addColorStop(0, 'rgba(10,7,5,0)');
   vig.addColorStop(1, 'rgba(10,7,5,0.80)');
@@ -168,7 +168,7 @@ function drawFrame(idx) {
   ctx.fillRect(0, H * 0.55, W, H * 0.45);
 }
 
-// â”€â”€ ANIMATION LOOP â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── ANIMATION LOOP ─────────────────────────────────────
 function startAnim() {
   function loop() {
     requestAnimationFrame(loop);
@@ -181,7 +181,7 @@ function startAnim() {
   loop();
 }
 
-// â”€â”€ INTERSECTION OBSERVER (section activation) â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── INTERSECTION OBSERVER (section activation) ─────────
 const pages    = Array.from(document.querySelectorAll('.page'));
 const navLinks = Array.from(document.querySelectorAll('.nav-link'));
 
@@ -200,7 +200,7 @@ pages.forEach(p => sectionObserver.observe(p));
 // Ensure hero active on init
 if (pages[0]) pages[0].classList.add('is-active');
 
-// â”€â”€ NAVBAR SCROLL SHADOW â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── NAVBAR SCROLL SHADOW ───────────────────────────────
 const navbar = document.getElementById('navbar');
 window.addEventListener('scroll', () => {
   if (navbar) {
@@ -210,7 +210,7 @@ window.addEventListener('scroll', () => {
   }
 }, { passive: true });
 
-// â”€â”€ BURGER / DRAWER MENU â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── BURGER / DRAWER MENU ───────────────────────────────
 const burger  = document.getElementById('burger');
 const drawer  = document.getElementById('nav-drawer');
 const overlay = document.getElementById('drawer-overlay');
@@ -235,7 +235,7 @@ if (dClose)  dClose.addEventListener('click', closeDrawer);
 if (overlay) overlay.addEventListener('click', closeDrawer);
 dLinks.forEach(l => l.addEventListener('click', closeDrawer));
 
-// â”€â”€ SMOOTH ANCHOR SCROLL â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── SMOOTH ANCHOR SCROLL ───────────────────────────────
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     const target = document.querySelector(a.getAttribute('href'));
@@ -246,7 +246,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
   });
 });
 
-// â”€â”€ CONTACT FORM â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── CONTACT FORM ───────────────────────────────────────
 const contactForm = document.getElementById('contact-form');
 if (contactForm) {
   contactForm.addEventListener('submit', e => {
@@ -254,7 +254,7 @@ if (contactForm) {
     const btn = contactForm.querySelector('button[type="submit"]');
     if (btn) {
       const orig = btn.textContent;
-      btn.textContent = 'âœ“ Ð—Ð°ÑÐ²ÐºÐ° Ð¾Ñ‚Ð¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð°';
+      btn.textContent = '✓ Заявка отправлена';
       btn.style.borderColor = 'rgba(201,169,110,0.8)';
       btn.style.color       = '#C9A96E';
       btn.disabled = true;
@@ -269,6 +269,6 @@ if (contactForm) {
   });
 }
 
-// â”€â”€ START â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+// ── START ──────────────────────────────────────────────
 loadAll();
 
