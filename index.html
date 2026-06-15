@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>WOOD &amp; CRAFT — Мебель ручной работы в Москве</title>
+  <meta name="description" content="Авторская мебель из массива дерева на заказ. Столы, шкафы, кровати, двери — ручная работа мастеров. 15 лет опыта, 800+ проектов. Москва." />
+  <meta name="keywords" content="мебель на заказ, мебель из массива, деревянная мебель, авторская мебель, Москва, столы, шкафы, кровати" />
+  <meta property="og:title" content="WOOD &amp; CRAFT — Мебель ручной работы" />
+  <meta property="og:description" content="Авторские изделия из массива дерева. Столы, шкафы, кровати. 15 лет опыта." />
+  <meta property="og:image" content="images/logo.png" />
+  <meta property="og:url" content="https://woodcraft.ru" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="ru_RU" />
+  <link rel="icon" type="image/png" href="images/logo.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <canvas id="gl-canvas"></canvas>
+  <canvas id="particle-canvas"></canvas>
+  <div class="grain-overlay"></div>
+
+  <div id="loader">
+    <div class="loader-inner">
+      <div class="loader-brand">
+        <span class="loader-logo-text">WOOD &amp; CRAFT</span>
+        <span class="loader-tagline">Мебель ручной работы</span>
+      </div>
+      <div class="progress-track"><div id="progress-bar"></div></div>
+      <p class="loader-pct" id="loader-pct">Загрузка...</p>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo">
+      <img src="images/logo.png" alt="WOOD &amp; CRAFT" class="nav-logo-img" onerror="this.style.display='none'" />
+      <span class="nav-logo-text">WOOD <span class="nav-amp">&amp;</span> CRAFT</span>
+    </div>
+    <ul class="nav-links" id="nav-links">
+      <li><a class="nav-link" href="#services">Услуги</a></li>
+      <li><a class="nav-link" href="#portfolio">Работы</a></li>
+      <li><a class="nav-link" href="#process">Процесс</a></li>
+      <li><a class="nav-link" href="#about">О нас</a></li>
+      <li><a class="nav-link nav-link--cta" href="#contact">Связаться</a></li>
+    </ul>
+    <button class="burger" id="burger" aria-label="Открыть меню">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <div class="nav-drawer" id="nav-drawer">
+    <div class="drawer-header">
+      <span class="drawer-logo">WOOD &amp; CRAFT</span>
+      <button class="drawer-close" id="drawer-close" aria-label="Закрыть меню">&#x2715;</button>
+    </div>
+    <nav class="drawer-nav">
+      <a class="drawer-link" href="#services">Услуги</a>
+      <a class="drawer-link" href="#portfolio">Портфолио</a>
+      <a class="drawer-link" href="#process">Процесс</a>
+      <a class="drawer-link" href="#about">О нас</a>
+      <a class="drawer-link drawer-link--cta" href="#contact">Связаться с нами</a>
+    </nav>
+    <div class="drawer-footer">
+      <p>+7 (999) 123-45-67</p>
+      <p>hello@woodcraft.ru</p>
+    </div>
+  </div>
+  <div class="drawer-overlay" id="drawer-overlay"></div>
+
+  <div id="ui-layer">
+    <div class="stage">
+
+      <!-- SECTION 0: HERO -->
+      <section class="page is-active" data-index="0" id="hero">
+        <div class="hero-inner">
+          <div class="hero-badge reveal-3d">Ручная работа · Массив дерева</div>
+          <h1 class="hero-title reveal-3d">WOOD<br /><em class="accent-gold">&amp;&nbsp;CRAFT</em></h1>
+          <p class="hero-subtitle reveal-3d">Мебель, рождённая из дерева</p>
+          <p class="hero-desc reveal-3d">Авторские изделия из массива — столы, шкафы, кровати.<br />Каждая вещь уникальна.</p>
+          <div class="hero-cta reveal-3d">
+            <a href="#portfolio" class="btn btn-primary">Смотреть работы</a>
+            <a href="#contact" class="btn btn-outline">Связаться с нами</a>
+          </div>
+        </div>
+        <div class="scroll-hint">
+          <div class="scroll-hint-line"></div>
+          <span>Листайте вниз</span>
+        </div>
+      </section>
+
+      <!-- SECTION 1: УСЛУГИ -->
+      <section class="page" data-index="1" id="services">
+        <div class="section-inner">
+          <div class="section-header reveal-3d">
+            <span class="section-label">Что мы делаем</span>
+            <h2 class="section-title">НАШИ УСЛУГИ</h2>
+            <p class="section-subtitle">Полный цикл производства</p>
+          </div>
+          <div class="cards-grid cards-grid--4 reveal-3d">
+            <div class="card card--service">
+              <div class="card-icon">🪑</div>
+              <h3 class="card-title">Корпусная мебель</h3>
+              <div class="card-divider"></div>
+              <p class="card-text">Кухни, шкафы, стеллажи из массива дерева</p>
+              <div class="card-tags"><span class="card-tag">Массив</span><span class="card-tag">На заказ</span></div>
+            </div>
+            <div class="card card--service">
+              <div class="card-icon">🛏️</div>
+              <h3 class="card-title">Спальни и кровати</h3>
+              <div class="card-divider"></div>
+              <p class="card-text">Авторские спальни с интегрированным хранением</p>
+              <div class="card-tags"><span class="card-tag">Дизайн</span><span class="card-tag">Хранение</span></div>
+            </div>
+            <div class="card card--service">
+              <div class="card-icon">🚪</div>
+              <h3 class="card-title">Двери и перегородки</h3>
+              <div class="card-divider"></div>
+              <p class="card-text">Межкомнатные двери и деревянные перегородки</p>
+              <div class="card-tags"><span class="card-tag">Интерьер</span><span class="card-tag">Перегородки</span></div>
+            </div>
+            <div class="card card--service">
+              <div class="card-icon">🔧</div>
+              <h3 class="card-title">Реставрация</h3>
+              <div class="card-divider"></div>
+              <p class="card-text">Восстановление антикварной мебели</p>
+              <div class="card-tags"><span class="card-tag">Антиквариат</span><span class="card-tag">Реставрация</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: ПОРТФОЛИО -->
+      <section class="page" data-index="2" id="portfolio">
+        <div class="section-inner">
+          <div class="section-header reveal-3d">
+            <span class="section-label">Избранное</span>
+            <h2 class="section-title">НАШИ РАБОТЫ</h2>
+            <p class="section-subtitle">Избранные проекты</p>
+          </div>
+          <div class="cards-grid cards-grid--4 reveal-3d">
+            <div class="card card--portfolio">
+              <div class="card-portfolio-visual"><div class="portfolio-icon-wrap"><span class="portfolio-icon">🪵</span></div></div>
+              <div class="card-body">
+                <h3 class="card-title">Обеденный стол из слэба</h3>
+                <p class="card-material">Слэб грецкого ореха, 3м</p>
+                <div class="card-divider"></div>
+                <p class="card-text">Живая текстура природного слэба — центр интерьера</p>
+              </div>
+            </div>
+            <div class="card card--portfolio">
+              <div class="card-portfolio-visual"><div class="portfolio-icon-wrap"><span class="portfolio-icon">🛏️</span></div></div>
+              <div class="card-body">
+                <h3 class="card-title">Спальный гарнитур</h3>
+                <p class="card-material">Дуб белёный, японский стиль</p>
+                <div class="card-divider"></div>
+                <p class="card-text">Минималистичная спальня — чистые линии и тёплое дерево</p>
+              </div>
+            </div>
+            <div class="card card--portfolio">
+              <div class="card-portfolio-visual"><div class="portfolio-icon-wrap"><span class="portfolio-icon">🍽️</span></div></div>
+              <div class="card-body">
+                <h3 class="card-title">Кухонный остров</h3>
+                <p class="card-material">Ясень + матовый чёрный металл</p>
+                <div class="card-divider"></div>
+                <p class="card-text">Контраст живого ясеня и стали — функциональная красота</p>
+              </div>
+            </div>
+            <div class="card card--portfolio">
+              <div class="card-portfolio-visual"><div class="portfolio-icon-wrap"><span class="portfolio-icon">📚</span></div></div>
+              <div class="card-body">
+                <h3 class="card-title">Книжный шкаф</h3>
+                <p class="card-material">Массив дуба, ручная резьба</p>
+                <div class="card-divider"></div>
+                <p class="card-text">Авторская резьба — вечный акцент любого интерьера</p>
+              </div>
+            </div>
+          </div>
+          <div class="section-cta reveal-3d">
+            <a href="#contact" class="btn btn-primary">Обсудить проект</a>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 3: ПРОЦЕСС -->
+      <section class="page" data-index="3" id="process">
+        <div class="section-inner">
+          <div class="section-header reveal-3d">
+            <span class="section-label">Наш подход</span>
+            <h2 class="section-title">КАК МЫ РАБОТАЕМ</h2>
+            <p class="section-subtitle">От идеи до готового изделия</p>
+          </div>
+          <div class="process-grid reveal-3d">
+            <div class="process-step">
+              <div class="step-num">01</div>
+              <div class="step-icon-wrap">📐</div>
+              <h3 class="step-title">Проектирование</h3>
+              <p class="step-text">3D-визуализация будущего изделия</p>
+            </div>
+            <div class="process-step">
+              <div class="step-num">02</div>
+              <div class="step-icon-wrap">🌳</div>
+              <h3 class="step-title">Подбор материала</h3>
+              <p class="step-text">Отборные доски, сушка и сортировка</p>
+            </div>
+            <div class="process-step">
+              <div class="step-num">03</div>
+              <div class="step-icon-wrap">⚙️</div>
+              <h3 class="step-title">Производство</h3>
+              <p class="step-text">Ручная работа мастеров в нашей мастерской</p>
+            </div>
+            <div class="process-step">
+              <div class="step-num">04</div>
+              <div class="step-icon-wrap">🚛</div>
+              <h3 class="step-title">Доставка и монтаж</h3>
+              <p class="step-text">Установка под ключ с гарантией 3 года</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: О НАС -->
+      <section class="page" data-index="4" id="about">
+        <div class="section-inner">
+          <div class="about-layout">
+            <div class="about-left reveal-3d">
+              <span class="section-label">Мастерская</span>
+              <h2 class="section-title">О МАСТЕРСКОЙ</h2>
+              <p class="about-subtitle">15 лет опыта создания уникальных изделий</p>
+              <p class="about-text">Мы не производим серийную мебель. Каждое изделие — отдельный проект, рождённый из диалога с заказчиком и уважения к материалу.</p>
+              <p class="about-text">Наши мастера работают только с отборным массивом: дуб, орех, ясень, бук. Каждая доска проходит многоступенчатый отбор и длительную сушку.</p>
+              <a href="#contact" class="btn btn-primary">Начать проект</a>
+            </div>
+            <div class="about-right reveal-3d">
+              <div class="facts-grid">
+                <div class="fact-card">
+                  <div class="fact-number accent-gold">15</div>
+                  <div class="fact-unit">лет работы</div>
+                  <div class="fact-desc">Опыт и традиции</div>
+                </div>
+                <div class="fact-card">
+                  <div class="fact-number accent-gold">800+</div>
+                  <div class="fact-unit">проектов</div>
+                  <div class="fact-desc">Реализованных заказов</div>
+                </div>
+                <div class="fact-card">
+                  <div class="fact-number accent-gold">3</div>
+                  <div class="fact-unit">года гарантии</div>
+                  <div class="fact-desc">На каждое изделие</div>
+                </div>
+                <div class="fact-card">
+                  <div class="fact-number accent-gold">100%</div>
+                  <div class="fact-unit">массив</div>
+                  <div class="fact-desc">Только натуральное дерево</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: КОНТАКТЫ -->
+      <section class="page" data-index="5" id="contact">
+        <div class="section-inner">
+          <div class="section-header reveal-3d">
+            <span class="section-label">Напишите нам</span>
+            <h2 class="section-title">СВЯЗАТЬСЯ С НАМИ</h2>
+            <p class="section-subtitle">Готовы обсудить ваш проект</p>
+          </div>
+          <div class="contact-layout reveal-3d">
+            <div class="contact-info">
+              <div class="contact-item">
+                <div class="contact-icon-wrap">📞</div>
+                <div class="contact-details">
+                  <span class="contact-label">Телефон</span>
+                  <a class="contact-value" href="tel:+79991234567">+7 (999) 123-45-67</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon-wrap">✉️</div>
+                <div class="contact-details">
+                  <span class="contact-label">Email</span>
+                  <a class="contact-value" href="mailto:hello@woodcraft.ru">hello@woodcraft.ru</a>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon-wrap">📍</div>
+                <div class="contact-details">
+                  <span class="contact-label">Адрес</span>
+                  <span class="contact-value">Москва, ул. Мастеровая, 12</span>
+                </div>
+              </div>
+              <div class="contact-item">
+                <div class="contact-icon-wrap">🕐</div>
+                <div class="contact-details">
+                  <span class="contact-label">Часы работы</span>
+                  <span class="contact-value">Пн–Пт: 9:00–19:00</span>
+                </div>
+              </div>
+            </div>
+            <form class="contact-form" id="contact-form">
+              <div class="form-group">
+                <label class="form-label" for="f-name">Ваше имя</label>
+                <input class="form-input" id="f-name" type="text" placeholder="Иван Петров" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-phone">Телефон</label>
+                <input class="form-input" id="f-phone" type="tel" placeholder="+7 (___) ___-__-__" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="f-msg">Опишите проект</label>
+                <textarea class="form-input form-textarea" id="f-msg" placeholder="Что нужно сделать? Материал, размеры, стиль..." rows="4"></textarea>
+              </div>
+              <button class="btn btn-primary btn--full" type="submit">Отправить заявку</button>
+              <p class="form-note">Ответим в течение 2 часов в рабочее время</p>
+            </form>
+          </div>
+          <footer class="site-footer reveal-3d">
+            <div class="footer-logo">WOOD <span class="accent-gold">&amp;</span> CRAFT</div>
+            <p class="footer-sub">Создаём вещи, которые живут вечно</p>
+            <p class="footer-copy">&copy; 2024 WOOD &amp; CRAFT — Все права защищены</p>
+          </footer>
+        </div>
+      </section>
+
+    </div>
+  </div>
+  <script src="app.js"></script>
+</body>
+</html>
